@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose a Resume Template</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .template { display: inline-block; margin: 20px; cursor: pointer; }
+        img { width: 200px; height: auto; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; margin-top: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Select a Resume Template</h2>
+    <div class="template">
+        <img src="template1-preview.jpg" alt="Template 1">
+        <br>
+        <button onclick="selectTemplate('template1')">Choose Template 1</button>
+    </div>
+    <div class="template">
+        <img src="template2-preview.jpg" alt="Template 2">
+        <br>
+        <button onclick="selectTemplate('template2')">Choose Template 2</button>
+    </div>
+
+    <script>
+        function selectTemplate(template) {
+            localStorage.setItem("selectedTemplate", template);
+            window.location.href = "upload.html"; // Redirect to the form page
+        }
+    </script>
+</body>
+</html>
+

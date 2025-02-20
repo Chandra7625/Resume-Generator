@@ -14,12 +14,12 @@
 <body>
     <h2>Select a Resume Template</h2>
     <div class="template">
-        <img src="template1-preview.jpg" alt="Template 1">
+        <img src="" alt="Template 1">
         <br>
         <button onclick="selectTemplate('template1')">Choose Template 1</button>
     </div>
     <div class="template">
-        <img src="template2-preview.jpg" alt="Template 2">
+        <img src="" alt="Template 2">
         <br>
         <button onclick="selectTemplate('template2')">Choose Template 2</button>
     </div>
@@ -27,7 +27,7 @@
     <script>
         function selectTemplate(template) {
             localStorage.setItem("selectedTemplate", template);
-            window.location.href = "upload.html"; // Redirect to the form page
+            window.location.href = "upload.html";
         }
     </script>
 </body>

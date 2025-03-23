@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #e0e0e0;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        header a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            gap: 30px;
+        }
+        .card {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            width: 250px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: black;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card img {
+            width: 80%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <body class="bg-gray-100">
+        <!-- Navbar -->
+        <nav class="bg-blue-600 text-white py-4 px-6 flex justify-between items-center">
+            <div class="text-xl font-bold">ResumePro</div>
+            <div class="flex items-center space-x-6">
+                <a href="About.html" class="hover:underline">About Us</a>
+                <a href="Resume_builder.html" class="hover:underline">Resume Builder</a>
+                <a href="login.html" class="hover:underline">Login</a>
+                <a href="signup.html" class="hover:underline">Signup</a>
+                <!-- Profile Circle -->
+                <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">
+                    JD
+                </div>
+            </div>
+        </nav>
+    <!-- Main Content Section -->
+    <div class="main-container">
+        <!-- Resume Generator Card -->
+        <a href="#" class="card" onclick="navigateToTemplate()">
+            <img src="resume-icon.png" alt="Resume Builder">
+            <p class="font-bold mt-2">Resume Builder</p>
+        </a>
+        <!-- Grammar Checker Card -->
+        <a href="#grammar-checker" class="card">
+            <img src="grammar-icon.png" alt="Grammar Checker">
+            <p class="font-bold mt-2">Grammar Checker</p>
+        </a>
+        <!-- ATS Checker Card -->
+        <a href="#ats-checker" class="card">
+            <img src="ats-icon.png" alt="ATS Checker">
+            <p class="font-bold mt-2">ATS Checker</p>
+        </a>
+    </div>
+    <script>
+        function navigateToTemplate() {
+            window.location.href = "choose_template.html";
+        }
+    </script>
+</body>
+</html>

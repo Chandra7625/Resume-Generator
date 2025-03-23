@@ -67,19 +67,36 @@
 <body>
     <body class="bg-gray-100">
         <!-- Navbar -->
-        <nav class="bg-blue-600 text-white py-4 px-6 flex justify-between items-center">
+        <nav class="bg-purple-600 text-white py-4 px-6 flex justify-between items-center flex-wrap">
             <div class="text-xl font-bold">ResumePro</div>
             <div class="flex items-center space-x-6">
-                <a href="About.html" class="hover:underline">About Us</a>
+                <a href="About_Us.html" class="hover:underline">About Us</a>
                 <a href="Resume_builder.html" class="hover:underline">Resume Builder</a>
                 <a href="login.html" class="hover:underline">Login</a>
                 <a href="signup.html" class="hover:underline">Signup</a>
-                <!-- Profile Circle -->
-                <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">
-                    JD
-                </div>
+                <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">JD</div>
             </div>
         </nav>
+            <!-- Profile Modal -->
+        <div id="profile-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center relative">
+                <span id="close-profile" class="absolute top-2 right-2 text-gray-500 cursor-pointer text-xl">&times;</span>
+                <div class="w-16 h-16 mx-auto bg-blue-600 text-white text-xl font-bold flex items-center justify-center rounded-full">JD</div>
+                <p class="mt-4 text-lg font-semibold">John Doe</p>
+                <p class="text-gray-600">johndoe@example.com</p>
+                <button id="signout-btn" class="mt-6 bg-red-500 text-white px-4 py-2 rounded-lg w-full hover:bg-red-600">Sign Out</button>
+            </div>
+        </div>
+        <!-- Sign Out Confirmation Modal -->
+    <div id="signout-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+            <p class="text-lg font-semibold">Are you sure you want to sign out?</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <button id="confirm-signout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Yes</button>
+                <button id="cancel-signout" class="bg-gray-300 px-4 py-2 rounded-lg hover:bg-gray-400">No</button>
+            </div>
+        </div>
+    </div>
     <!-- Main Content Section -->
     <div class="main-container">
         <!-- Resume Generator Card -->
@@ -102,6 +119,49 @@
         function navigateToTemplate() {
             window.location.href = "choose_template.html";
         }
+        // Profile Modal Functionality
+        const profileBtn = document.getElementById("profile-btn");
+        const profileModal = document.getElementById("profile-modal");
+        const closeProfile = document.getElementById("close-profile");
+        const signoutBtn = document.getElementById("signout-btn");
+        const signoutModal = document.getElementById("signout-modal");
+        const confirmSignout = document.getElementById("confirm-signout");
+        const cancelSignout = document.getElementById("cancel-signout");
+
+        profileBtn.addEventListener("click", () => {
+            profileModal.classList.remove("hidden");
+        });
+
+        closeProfile.addEventListener("click", () => {
+            profileModal.classList.add("hidden");
+        });
+
+        profileModal.addEventListener("click", (e) => {
+            if (e.target === profileModal) profileModal.classList.add("hidden");
+        });
+
+        signoutBtn.addEventListener("click", () => {
+            profileModal.classList.add("hidden");
+            signoutModal.classList.remove("hidden");
+        });
+
+        confirmSignout.addEventListener("click", () => {
+            signoutModal.classList.add("hidden");
+            alert("You have signed out.");
+            // Additional sign out functionality could go here
+        });
+
+        cancelSignout.addEventListener("click", () => {
+            signoutModal.classList.add("hidden");
+            // Optionally reopen the profile modal
+            // profileModal.classList.remove("hidden");
+        });
+
+        // Close modals when clicking outside
+        signoutModal.addEventListener("click", (e) => {
+            if (e.target === signoutModal) signoutModal.classList.add("hidden");
+        });
+
     </script>
 </body>
 </html>

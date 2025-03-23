@@ -44,7 +44,7 @@
     <div class="resume-container">
         <div class="resume-header">
             <h1 id="displayName">Your Name</h1>
-            <p id="displayEmail">your.email@example.com | <span id="displayPhone">123-456-7890</span></p>
+            <p><span id="displayEmail">your.email@example.com</span> | <span id="displayPhone">123-456-7890</span></p>
             <p id="displayAddress">Your Address</p>
         </div>
         
@@ -78,21 +78,67 @@
     </div>
 
     <script>
-       
         function loadResumeData() {
-            document.getElementById('displayName').innerText = localStorage.getItem('name') || 'Your Name';
-            document.getElementById('displayEmail').innerText = localStorage.getItem('email') || 'your.email@example.com';
-            document.getElementById('displayPhone').innerText = localStorage.getItem('phone') || '123-456-7890';
-            document.getElementById('displayAddress').innerText = localStorage.getItem('address') || 'Your Address';
-            document.getElementById('displaySummary').innerText = localStorage.getItem('summary') || 'Your professional summary goes here.';
-            document.getElementById('displayDegree').innerText = localStorage.getItem('degree') || 'Degree Name';
-            document.getElementById('displayInstitution').innerText = localStorage.getItem('institution') || 'Institution Name';
-            document.getElementById('displayYear').innerText = localStorage.getItem('year') || 'Year';
-            document.getElementById('displaySkills').innerText = localStorage.getItem('skills') || 'Your skills go here.';
-            document.getElementById('displayAchievements').innerText = localStorage.getItem('achievements') || 'Your achievements go here.';
+            console.log("Attempting to load resume data...");
+
+            const storedData = localStorage.getItem("resumeData");
+
+            if (!storedData) {
+                console.warn("No resume data found in localStorage. Redirecting to upload page...");
+                window.location.href = "upload.html"; // Redirect if no data is found
+                return;
+            }
+
+            const userData = JSON.parse(storedData);
+            console.log("Loaded resume data:", userData);
+
+            function setTextContent(id, value, fallback) {
+                let element = document.getElementById(id);
+                if (element) {
+                    element.innerText = value || fallback;
+                } else {
+                    console.error(`Element with ID '${id}' not found.`);
+                }
+            }
+
+            setTextContent('displayName', userData.name, 'Your Name');
+            setTextContent('displayEmail', userData.email, 'your.email@example.com');
+            setTextContent('displayPhone', userData.phone, '123-456-7890');
+            setTextContent('displayAddress', userData.address, 'Your Address');
+            setTextContent('displaySummary', userData.summary, 'Your professional summary goes here.');
+            setTextContent('displayDegree', userData.education?.degree, 'Degree Name');
+            setTextContent('displayInstitution', userData.education?.institution, 'Institution Name');
+            setTextContent('displayYear', userData.education?.year, 'Year');
+            setTextContent('displaySkills', userData.skills ? userData.skills.join(', ') : 'Your skills go here.');
+            setTextContent('displayAchievements', userData.achievements, 'Your achievements go here.');
+
+            // Populate work experience dynamically
+            const experienceContainer = document.getElementById('displayExperience');
+            if (!experienceContainer) {
+                console.error("Element with ID 'displayExperience' not found.");
+                return;
+            }
+
+            experienceContainer.innerHTML = ''; // Clear previous entries
+
+            if (userData.experiences && userData.experiences.length > 0) {
+                userData.experiences.forEach(exp => {
+                    let expElement = document.createElement('div');
+                    expElement.innerHTML = `
+                        <p><strong>${exp.jobTitle || 'Job Title'}</strong> - ${exp.company || 'Company'} (${exp.duration || 'Duration'})</p>
+                        <p>${exp.jobDescription || 'Description of responsibilities.'}</p>
+                    `;
+                    experienceContainer.appendChild(expElement);
+                });
+            } else {
+                experienceContainer.innerHTML = '<p>No work experience added.</p>';
+            }
         }
-        
-        window.onload = loadResumeData;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("DOM fully loaded, running loadResumeData()...");
+            loadResumeData();
+        });
     </script>
 </body>
 </html>

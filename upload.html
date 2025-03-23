@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -36,20 +36,20 @@
             <div id="experience-section">
                 <div class="experience-entry mb-4">
                     <div class="mb-3">
-                        <label for="jobTitle" class="form-label">Job Title</label>
-                        <input type="text" class="form-control" placeholder="Enter your job title">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" class="form-control jobTitle" placeholder="Enter your job title">
                     </div>
                     <div class="mb-3">
-                        <label for="company" class="form-label">Company</label>
-                        <input type="text" class="form-control" placeholder="Enter company name">
+                        <label class="form-label">Company</label>
+                        <input type="text" class="form-control company" placeholder="Enter company name">
                     </div>
                     <div class="mb-3">
-                        <label for="duration" class="form-label">Duration</label>
-                        <input type="text" class="form-control" placeholder="E.g., Jan 2020 - Dec 2023">
+                        <label class="form-label">Duration</label>
+                        <input type="text" class="form-control duration" placeholder="E.g., Jan 2020 - Dec 2023">
                     </div>
                     <div class="mb-3">
-                        <label for="jobDescription" class="form-label">Description</label>
-                        <textarea class="form-control" rows="3" placeholder="Briefly describe your responsibilities"></textarea>
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control jobDescription" rows="3" placeholder="Briefly describe your responsibilities"></textarea>
                     </div>
                 </div>
             </div>
@@ -92,19 +92,40 @@
     </div>
 
     <script>
-        document.getElementById('resumeForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        function addExperienceEntry() {
+            let experienceSection = document.getElementById('experience-section');
+            let newEntry = document.createElement('div');
+            newEntry.classList.add('experience-entry', 'mb-4');
+            newEntry.innerHTML = `
+                <div class="mb-3">
+                    <label class="form-label">Job Title</label>
+                    <input type="text" class="form-control jobTitle" placeholder="Enter your job title">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Company</label>
+                    <input type="text" class="form-control company" placeholder="Enter company name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Duration</label>
+                    <input type="text" class="form-control duration" placeholder="E.g., Jan 2020 - Dec 2023">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control jobDescription" rows="3" placeholder="Briefly describe your responsibilities"></textarea>
+                </div>
+            `;
+            experienceSection.appendChild(newEntry);
+        }
 
-            let reader = new FileReader();
-            let file = document.getElementById("profilePhoto").files[0];
+        document.getElementById('resumeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
 
             let experiences = [];
             document.querySelectorAll('.experience-entry').forEach(entry => {
-                let jobTitle = entry.querySelector('input[placeholder="Enter your job title"]').value;
-                let company = entry.querySelector('input[placeholder="Enter company name"]').value;
-                let duration = entry.querySelector('input[placeholder="E.g., Jan 2020 - Dec 2023"]').value;
-                let jobDescription = entry.querySelector('textarea[placeholder="Briefly describe your responsibilities"]').value;
-
+                let jobTitle = entry.querySelector('.jobTitle').value;
+                let company = entry.querySelector('.company').value;
+                let duration = entry.querySelector('.duration').value;
+                let jobDescription = entry.querySelector('.jobDescription').value;
                 experiences.push({ jobTitle, company, duration, jobDescription });
             });
 
@@ -127,18 +148,28 @@
                 };
 
                 localStorage.setItem('resumeData', JSON.stringify(resumeData));
-                window.location.href = 'resume.html'; // Redirect to the resume page
+
+                let selectedTemplate = localStorage.getItem("selectedTemplate");
+                if (selectedTemplate) {
+                    window.location.href = selectedTemplate + ".html";
+                } else {
+                    alert("No template selected. Redirecting to default template.");
+                    window.location.href = "classic_template.html"; 
+                }
             }
 
-            if (file) {
-                reader.onloadend = function() {
+            let fileInput = document.getElementById("profilePhoto").files[0];
+            if (fileInput) {
+                let reader = new FileReader();
+                reader.onloadend = function () {
                     saveAndRedirect(reader.result);
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(fileInput);
             } else {
-                saveAndRedirect(""); // If no image, proceed without it
+                saveAndRedirect("");
             }
         });
     </script>
 </body>
 </html>
+

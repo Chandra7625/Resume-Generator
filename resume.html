@@ -28,6 +28,7 @@
             margin-bottom: 20px;
         }
     </style>
+    <link id="templateStylesheet" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="resume-container">
@@ -100,6 +101,14 @@
                 experienceDiv.appendChild(expEntry);
             });
         });
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            let selectedTemplate = localStorage.getItem("selectedTemplate");
+            if (selectedTemplate) {
+                document.getElementById("templateStylesheet").href = selectedTemplate + ".css";
+            }
+        });
+   
     </script>
 </body>
 </html>

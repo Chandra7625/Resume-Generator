@@ -1,29 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose a Resume Template</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
-        .template { display: inline-block; margin: 20px; cursor: pointer; }
-        img { width: 200px; height: auto; border: 1px solid #ddd; border-radius: 5px; }
-        button { padding: 10px 20px; margin-top: 10px; cursor: pointer; }
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .template {
+            display: inline-block;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
     <h2>Select a Resume Template</h2>
     <div class="template">
         <img src="" alt="Template 1">
         <br>
-        <button onclick="selectTemplate('template1')">Choose Template 1</button>
+        <button onclick="selectTemplate('classic_template')">Choose Template 1</button>
     </div>
     <div class="template">
         <img src="" alt="Template 2">
         <br>
-        <button onclick="selectTemplate('template2')">Choose Template 2</button>
+        <button onclick="selectTemplate('modern_template')">Choose Template 2</button>
     </div>
-
+    <div class="template">
+        <img src="" alt="Template 3">
+        <br>
+        <button onclick="selectTemplate('green_template')">Choose Template 3</button>
+    </div>
+    <div class="template">
+        <img src="" alt="Template 4">
+        <br>
+        <button onclick="selectTemplate('pink-template')">Choose Template 4</button>
+    </div>
     <script>
         function selectTemplate(template) {
             localStorage.setItem("selectedTemplate", template);
@@ -31,5 +61,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>

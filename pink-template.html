@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .resume {
+            display: flex;
+            width: 210mm;
+            height: 297mm;
+            background: #ecddd6;
+            color: rgb(22, 21, 21);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .left {
+            width: 70%;
+            padding: 20px;
+        }
+        .right {
+            width: 30%;
+            background: #f3947c;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        h1 {
+            color: #d9534f;
+            text-transform: uppercase;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 20px;
+            color: #d9534f;
+            border-bottom: 2px solid #d9534f;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .contact-info, .skills {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume">
+    <div class="left">
+        <h1 id="name"></h1>
+        <h2>Professional Summary</h2>
+        <p id="summary"></p>
+
+        <h2>Work Experience</h2>
+        <div id="experience"></div>
+
+        <h2>Education</h2>
+        <p id="degree"></p>
+        <p id="institution"></p>
+        <p id="year"></p>
+
+        <h2>Achievements</h2>
+        <p id="achievements"></p>
+    </div>
+
+    <div class="right">
+        <img id="profilePhoto" class="profile-photo" src="" alt="Profile Photo">
+        
+        <div class="contact-info">
+            <h2>Contact</h2>
+            <p id="address"></p>
+            <p id="phone"></p>
+            <p id="email"></p>
+        </div>
+
+        <div class="skills">
+            <h2>Skills</h2>
+            <ul id="skills-list"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let resumeData = JSON.parse(localStorage.getItem('resumeData'));
+
+        if (resumeData) {
+            document.getElementById("name").textContent = resumeData.name;
+            document.getElementById("summary").textContent = resumeData.summary;
+            document.getElementById("address").textContent = resumeData.address;
+            document.getElementById("phone").textContent = resumeData.phone;
+            document.getElementById("email").textContent = resumeData.email;
+            document.getElementById("degree").textContent = resumeData.education.degree;
+            document.getElementById("institution").textContent = resumeData.education.institution;
+            document.getElementById("year").textContent = resumeData.education.year;
+            document.getElementById("achievements").textContent = resumeData.achievements;
+
+            let skillsList = document.getElementById("skills-list");
+            resumeData.skills.forEach(skill => {
+                let li = document.createElement("li");
+                li.textContent = skill.trim();
+                skillsList.appendChild(li);
+            });
+
+            let experienceDiv = document.getElementById("experience");
+            resumeData.experiences.forEach(exp => {
+                let expEntry = document.createElement("div");
+                expEntry.innerHTML = `
+                    <p><strong>${exp.jobTitle}</strong> at <strong>${exp.company}</strong> (${exp.duration})</p>
+                    <p>${exp.jobDescription}</p>
+                `;
+                experienceDiv.appendChild(expEntry);
+            });
+
+            if (resumeData.profilePhoto) {
+                document.getElementById("profilePhoto").src = resumeData.profilePhoto;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
+
+

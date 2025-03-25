@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern A4 Resume</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .resume-container {
+            width: 210mm;
+            height: 297mm;
+            background: #ffffff;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .left-section {
+            width: 35%;
+            background: #2204a7;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            object-fit: cover;
+        }
+        .right-section {
+            width: 65%;
+            padding: 30px;
+        }
+        .resume-header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #2204a7;
+            font-weight: bolder;
+        }
+        .resume-section h3 {
+            font-size: 18px;
+            color: #2204a7;
+            border-bottom: 2px solid #2204a7;
+            padding-bottom: 5px;
+        }
+        .download-btn {
+            display: block;
+            width: 210mm;
+            padding: 12px;
+            font-size: 16px;
+            background: #f52a4c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .download-btn:hover {
+            background: #2204a7;
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container" id="resume">
+        <div class="left-section">
+            <img id="profilePhoto" class="profile-photo" src="" alt="Profile Photo">
+            <h3>Contact</h3>
+            <p id="displayEmail">your.email@example.com</p>
+            <p id="displayPhone">123-456-7890</p>
+            <p id="displayAddress">Your Address</p>
+            <h3>Skills</h3>
+            <ul id="displaySkillsList"></ul>
+        </div>
+
+        <div class="right-section">
+            <div class="resume-header">
+                <h1 id="displayName">Your Name</h1>
+                <p id="displayJobTitle">Your Job Title</p>
+            </div>
+            <div class="resume-section">
+                <h3>Professional Summary</h3>
+                <p id="displaySummary">Your professional summary goes here.</p>
+            </div>
+            <div class="resume-section">
+                <h3>Work Experience</h3>
+                <div id="displayExperience"></div>
+            </div>
+            <div class="resume-section">
+                <h3>Education</h3>
+                <p><strong id="displayDegree">Degree Name</strong>, <span id="displayInstitution">Institution Name</span> (<span id="displayYear">Year</span>)</p>
+            </div>
+            <div class="resume-section">
+                <h3>Achievements</h3>
+                <p id="displayAchievements">Your achievements go here.</p>
+            </div>
+        </div>
+    </div>
+
+    <button class="download-btn" onclick="downloadResume()">Download as PDF</button>
+
+    <script>
+        function loadResumeData() {
+            const storedData = localStorage.getItem("resumeData");
+            if (!storedData) {
+                window.location.href = "upload.html";
+                return;
+            }
+            const userData = JSON.parse(storedData);
+            document.getElementById('displayName').innerText = userData.name || 'Your Name';
+            document.getElementById('displayJobTitle').innerText = userData.jobTitle || 'Your Job Title';
+            document.getElementById('displayEmail').innerText = userData.email || 'your.email@example.com';
+            document.getElementById('displayPhone').innerText = userData.phone || '123-456-7890';
+            document.getElementById('displayAddress').innerText = userData.address || 'Your Address';
+            document.getElementById('displaySummary').innerText = userData.summary || 'Your professional summary goes here.';
+            document.getElementById('displayDegree').innerText = userData.education?.degree || 'Degree Name';
+            document.getElementById('displayInstitution').innerText = userData.education?.institution || 'Institution Name';
+            document.getElementById('displayYear').innerText = userData.education?.year || 'Year';
+            document.getElementById('displayAchievements').innerText = userData.achievements || 'Your achievements go here.';
+            
+            const skillsList = document.getElementById('displaySkillsList');
+            skillsList.innerHTML = '';
+            if (userData.skills) {
+                userData.skills.forEach(skill => {
+                    let li = document.createElement("li");
+                    li.textContent = skill;
+                    skillsList.appendChild(li);
+                });
+            }
+
+            const experienceContainer = document.getElementById('displayExperience');
+            experienceContainer.innerHTML = '';
+            if (userData.experiences) {
+                userData.experiences.forEach(exp => {
+                    let expDiv = document.createElement('div');
+                    expDiv.innerHTML = `<p><strong>${exp.jobTitle}</strong> - ${exp.company} (${exp.duration})</p><p>${exp.jobDescription}</p>`;
+                    experienceContainer.appendChild(expDiv);
+                });
+            }
+
+            if (userData.profilePhoto) {
+                document.getElementById("profilePhoto").src = userData.profilePhoto;
+            }
+        }
+
+        function downloadResume() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const resumeElement = document.getElementById("resume");
+
+            html2canvas(resumeElement, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const imgWidth = 210; 
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save("Resume.pdf");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadResumeData);
+    </script>
+</body>
+</html>
+
+
+

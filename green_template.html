@@ -1,258 +1,30 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        .resume-container {
-            display: flex;
-            max-width: 900px;
-            margin: auto;
-            background: white;
-        }
-        .sidebar {
-            background-color: #5a7d4d;
-            color: white;
-            width: 30%;
-            padding: 20px;
-        }
-        .main-content {
-            width: 70%;
-            padding: 20px;
-        }
-        .profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto;
-        }
-        h2, h3 {
-            color: #5a7d4d;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="resume-container">
-        <div class="sidebar">
-            <img id="profilePic" class="profile-pic" src="" alt="Profile Picture">
-            <h3 id="fullName">Full Name</h3>
-            <p id="email">Email</p>
-            <p id="phone">Phone</p>
-            <p id="address">Address</p>
-            <h4>Skills</h4>
-            <ul id="skillsList"></ul>
-        </div>
-        <div class="main-content">
-            <h2>Professional Summary</h2>
-            <p id="summary"></p>
-            <h2>Professional Experience</h2>
-            <div id="experienceSection"></div>
-            <h2>Education</h2>
-            <p><strong id="degree"></strong>, <span id="institution"></span> (<span id="year"></span>)</p>
-            <h2>Achievements</h2>
-            <p id="achievements"></p>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let resumeData = JSON.parse(localStorage.getItem('resumeData'));
-            if (resumeData) {
-                document.getElementById("fullName").textContent = resumeData.name;
-                document.getElementById("email").textContent = resumeData.email;
-                document.getElementById("phone").textContent = resumeData.phone;
-                document.getElementById("address").textContent = resumeData.address;
-                document.getElementById("summary").textContent = resumeData.summary;
-                document.getElementById("degree").textContent = resumeData.education.degree;
-                document.getElementById("institution").textContent = resumeData.education.institution;
-                document.getElementById("year").textContent = resumeData.education.year;
-                document.getElementById("achievements").textContent = resumeData.achievements;
-                
-                if (resumeData.profilePhoto) {
-                    document.getElementById("profilePic").src = resumeData.profilePhoto;
-                }
-                
-                let skillsList = document.getElementById("skillsList");
-                resumeData.skills.forEach(skill => {
-                    let li = document.createElement("li");
-                    li.textContent = skill.trim();
-                    skillsList.appendChild(li);
-                });
-
-                let experienceSection = document.getElementById("experienceSection");
-                resumeData.experiences.forEach(exp => {
-                    let expDiv = document.createElement("div");
-                    expDiv.classList.add("section");
-                    expDiv.innerHTML = `<h3>${exp.jobTitle}</h3><p><strong>${exp.company}</strong> - ${exp.duration}</p><p>${exp.jobDescription}</p>`;
-                    experienceSection.appendChild(expDiv);
-                });
-            }
-        });
-    </script>
-</body>
-</html> -->
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-        .resume-container {
-            width: 210mm;
-            height: 297mm;
-            background: white;
-            display: flex;
-            flex-direction: row;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .left-section {
-            width: 35%;
-            background: #026e38;
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-        .left-section img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-        .left-section h2 {
-            font-size: 22px;
-        }
-        .left-section p, .left-section ul {
-            font-size: 14px;
-            text-align: left;
-        }
-        .right-section {
-            width: 65%;
-            padding: 20px;
-        }
-        .right-section h1 {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 15px;
-        }
-        .section h3 {
-            background: #026e38;
-            color: white;
-            padding: 5px;
-        }
-    </style>
-</head>
-<body>
-    <div class="resume-container">
-        <div class="left-section">
-            <img id="profileImg" src="" alt="Profile Photo">
-            <h2 id="fullName"></h2>
-            <p id="email"></p>
-            <p id="phone"></p>
-            <p id="address"></p>
-            <h3>Skills</h3>
-            <ul id="skillsList"></ul>
-        </div>
-        <div class="right-section">
-            <h1 id="resumeName"></h1>
-            <div class="section">
-                <h3>Professional Summary</h3>
-                <p id="summary"></p>
-            </div>
-            <div class="section">
-                <h3>Professional Experience</h3>
-                <ul id="experienceList"></ul>
-            </div>
-            <div class="section">
-                <h3>Education</h3>
-                <p id="education"></p>
-            </div>
-            <div class="section">
-                <h3>Achievements</h3>
-                <p id="achievements"></p>
-            </div>
-        </div>
-    </div>
-    <script>
-        let resumeData = JSON.parse(localStorage.getItem('resumeData'));
-        if (resumeData) {
-            document.getElementById("fullName").innerText = resumeData.name;
-            document.getElementById("resumeName").innerText = resumeData.name;
-            document.getElementById("email").innerText = resumeData.email;
-            document.getElementById("phone").innerText = resumeData.phone;
-            document.getElementById("address").innerText = resumeData.address;
-            document.getElementById("summary").innerText = resumeData.summary;
-            document.getElementById("achievements").innerText = resumeData.achievements;
-            document.getElementById("education").innerText = `${resumeData.education.degree}, ${resumeData.education.institution}, ${resumeData.education.year}`;
-            
-            if (resumeData.profilePhoto) {
-                document.getElementById("profileImg").src = resumeData.profilePhoto;
-            }
-            
-            let skillsList = document.getElementById("skillsList");
-            resumeData.skills.forEach(skill => {
-                let li = document.createElement("li");
-                li.innerText = skill.trim();
-                skillsList.appendChild(li);
-            });
-            
-            let experienceList = document.getElementById("experienceList");
-            resumeData.experiences.forEach(exp => {
-                let li = document.createElement("li");
-                li.innerHTML = `<strong>${exp.jobTitle}</strong> at ${exp.company} (${exp.duration})<br>${exp.jobDescription}`;
-                experienceList.appendChild(li);
-            });
-        }
-    </script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .resume-container {
             width: 210mm;
-            height: 297mm;
+            min-height: 297mm;
             background-color: white;
             display: flex;
             border: 2px solid #000;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: auto;
+            padding: 20px;
         }
         .left-section {
             width: 35%;
@@ -300,10 +72,25 @@
             margin-top: 10px;
             font-size: 14px;
         }
+        .download-btn {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: #d9534f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .download-btn:hover {
+            background: #c9302c;
+        }
     </style>
 </head>
 <body>
-    <div class="resume-container">
+
+    <div class="resume-container" id="resume">
         <div class="left-section">
             <img id="profilePhoto" src="" alt="Profile Photo">
             <h3>Contact Information</h3>
@@ -331,30 +118,51 @@
         </div>
     </div>
 
+    <button class="download-btn" onclick="downloadResume()">Download as PDF</button>
+
     <script>
-        let resumeData = JSON.parse(localStorage.getItem('resumeData'));
-        if (resumeData) {
-            document.getElementById('name').textContent = resumeData.name;
-            document.getElementById('phone').textContent = resumeData.phone;
-            document.getElementById('email').textContent = resumeData.email;
-            document.getElementById('address').textContent = resumeData.address;
-            document.getElementById('summary').textContent = resumeData.summary;
-            document.getElementById('degree').textContent = resumeData.education.degree;
-            document.getElementById('institution').textContent = resumeData.education.institution;
-            document.getElementById('year').textContent = resumeData.education.year;
-            document.getElementById('skills').textContent = resumeData.skills.join(', ');
-            document.getElementById('achievements').textContent = resumeData.achievements;
-            
-            let experienceHTML = '';
-            resumeData.experiences.forEach(exp => {
-                experienceHTML += `<p><strong>${exp.jobTitle}</strong> at ${exp.company} (${exp.duration})</p><p>${exp.jobDescription}</p>`;
-            });
-            document.getElementById('experience').innerHTML = experienceHTML;
-            
-            if (resumeData.profilePhoto) {
-                document.getElementById('profilePhoto').src = resumeData.profilePhoto;
+        function loadResumeData() {
+            let resumeData = JSON.parse(localStorage.getItem('resumeData'));
+            if (resumeData) {
+                document.getElementById('name').textContent = resumeData.name;
+                document.getElementById('phone').textContent = resumeData.phone;
+                document.getElementById('email').textContent = resumeData.email;
+                document.getElementById('address').textContent = resumeData.address;
+                document.getElementById('summary').textContent = resumeData.summary;
+                document.getElementById('degree').textContent = resumeData.education.degree;
+                document.getElementById('institution').textContent = resumeData.education.institution;
+                document.getElementById('year').textContent = resumeData.education.year;
+                document.getElementById('skills').textContent = resumeData.skills.join(', ');
+                document.getElementById('achievements').textContent = resumeData.achievements;
+
+                let experienceHTML = '';
+                resumeData.experiences.forEach(exp => {
+                    experienceHTML += `<p><strong>${exp.jobTitle}</strong> at ${exp.company} (${exp.duration})</p><p>${exp.jobDescription}</p>`;
+                });
+                document.getElementById('experience').innerHTML = experienceHTML;
+
+                if (resumeData.profilePhoto) {
+                    document.getElementById('profilePhoto').src = resumeData.profilePhoto;
+                }
             }
         }
+
+        function downloadResume() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const resumeElement = document.getElementById("resume");
+
+            html2canvas(resumeElement, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const imgWidth = 210; 
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save("Resume.pdf");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadResumeData);
     </script>
+
 </body>
 </html>

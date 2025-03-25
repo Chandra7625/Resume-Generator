@@ -7,53 +7,124 @@
     <title>Choose a Resume Template</title>
     <style>
         body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e6d6f2;
+            color: #333;
             text-align: center;
-            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: #5c4b99;
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            margin: 20px 0;
+            font-size: 22px;
+            color: #5c4b99;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
         }
 
         .template {
-            display: inline-block;
-            margin: 20px;
-            cursor: pointer;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .template:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
         }
 
         img {
-            width: 200px;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            width: 180px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 10px;
         }
 
         button {
-            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 15px;
             margin-top: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
             cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+
+        .description {
+            font-size: 12px;
+            color: #777;
+            margin-top: 8px;
+        }
+
+        footer {
+            background: #5c4b99;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 12px;
         }
     </style>
 </head>
 
 <body>
-    <h2>Select a Resume Template</h2>
-    <div class="template">
-        <img src="" alt="Template 1">
-        <br>
-        <button onclick="selectTemplate('classic_template')">Choose Template 1</button>
+    <header>Choose Your Perfect Resume Template</header>
+    <h2>Select a Professional Resume Template</h2>
+    <div class="container">
+        <div class="template">
+            <img src="https://free-cv-templates.com/wp-content/uploads/2017/02/Frame-1-772x1024.jpg" alt="Template 1">
+            <p class="description">A classic resume template with a professional touch.</p>
+            <button onclick="selectTemplate('classic_template')">Choose Template 1</button>
+        </div>
+        <div class="template">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMQFIhOapqF_eHfH8IPFN22laC-349gzkQCg&s"
+                alt="Template 2">
+            <p class="description">A modern and elegant design for professionals.</p>
+            <button onclick="selectTemplate('blue_template')">Choose Template 2</button>
+        </div>
+        <div class="template">
+            <img src="https://www.resumebuilder.com/wp-content/uploads/2023/10/Food-Service-Basic-Resume-Example.pdf.jpeg"
+                alt="Template 3">
+            <p class="description">A creative template for showcasing your skills.</p>
+            <button onclick="selectTemplate('green_template')">Choose Template 3</button>
+        </div>
+        <div class="template">
+            <img src="https://www.hloom.com/images/application-engineer-resume-template-contessa-rose.svg"
+                alt="Template 4">
+            <p class="description">A stylish resume design with a unique layout.</p>
+            <button onclick="selectTemplate('pink_template')">Choose Template 4</button>
+        </div>
     </div>
-    <div class="template">
-        <img src="" alt="Template 2">
-        <br>
-        <button onclick="selectTemplate('modern_template')">Choose Template 2</button>
-    </div>
-    <div class="template">
-        <img src="" alt="Template 3">
-        <br>
-        <button onclick="selectTemplate('green_template')">Choose Template 3</button>
-    </div>
-    <div class="template">
-        <img src="" alt="Template 4">
-        <br>
-        <button onclick="selectTemplate('pink-template')">Choose Template 4</button>
-    </div>
+
+    <footer>&copy; 2025 Resume Builder | Designed for Professionals</footer>
+
     <script>
         function selectTemplate(template) {
             localStorage.setItem("selectedTemplate", template);

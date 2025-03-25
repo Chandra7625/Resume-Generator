@@ -78,10 +78,10 @@
         <div class="text-xl font-bold">ResumePro</div>
         <div class="flex items-center space-x-6">
             <a href="About_Us.html" class="hover:underline">About Us</a>
-            <a href="Resume_Builder_New.html" class="hover:underline">Resume Builder</a>
+            <a href="Resume_Builder.html" class="hover:underline">Resume Builder</a>
             <a href="login.html" class="hover:underline">Login</a>
             <a href="signup.html" class="hover:underline">Signup</a>
-            <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">JD</div>
+            <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">PM</div>
         </div>
     </nav>
     
@@ -89,9 +89,9 @@
     <div id="profile-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center relative">
             <span id="close-profile" class="absolute top-2 right-2 text-gray-500 cursor-pointer text-xl">&times;</span>
-            <div class="w-16 h-16 mx-auto bg-blue-600 text-white text-xl font-bold flex items-center justify-center rounded-full">JD</div>
-            <p class="mt-4 text-lg font-semibold">John Doe</p>
-            <p class="text-gray-600">johndoe@example.com</p>
+            <div class="w-16 h-16 mx-auto bg-blue-600 text-white text-xl font-bold flex items-center justify-center rounded-full">PM</div>
+            <p class="mt-4 text-lg font-semibold">Preeti Mishra</p>
+            <p class="text-gray-600">Preeti@gmail.com</p>
             <button id="signout-btn" class="mt-6 bg-red-500 text-white px-4 py-2 rounded-lg w-full hover:bg-red-600">Sign Out</button>
         </div>
     </div>
@@ -202,7 +202,7 @@
                         <span class="ml-2 text-gray-600">5.0</span>
                     </div>
                     <p class="text-gray-600 italic mb-4">"Created my resume in just 20 minutes and got called for an interview the next day. The templates are amazing!"</p>
-                    <p class="font-medium">- Sarah K.</p>
+                    <p class="font-medium">- Bhavesh Kumar</p>
                 </div>
                 
                 <div class="bg-white p-6 rounded-lg shadow-md">
@@ -217,7 +217,7 @@
                         <span class="ml-2 text-gray-600">5.0</span>
                     </div>
                     <p class="text-gray-600 italic mb-4">"As someone with no design skills, this tool was a lifesaver. Professional resume without any hassle!"</p>
-                    <p class="font-medium">- Michael T.</p>
+                    <p class="font-medium">- Ruchi Thapa</p>
                 </div>
                 
                 <div class="bg-white p-6 rounded-lg shadow-md">
@@ -232,7 +232,7 @@
                         <span class="ml-2 text-gray-600">4.5</span>
                     </div>
                     <p class="text-gray-600 italic mb-4">"After using ResumePro, I received compliments from recruiters about my resume design. Highly recommend!"</p>
-                    <p class="font-medium">- Jessica W.</p>
+                    <p class="font-medium">- Ritwick Sen</p>
                 </div>
             </div>
         </div>
@@ -365,13 +365,10 @@
         confirmSignout.addEventListener("click", () => {
             signoutModal.classList.add("hidden");
             alert("You have signed out.");
-            // Additional sign out functionality could go here
         });
 
         cancelSignout.addEventListener("click", () => {
             signoutModal.classList.add("hidden");
-            // Optionally reopen the profile modal
-            // profileModal.classList.remove("hidden");
         });
 
         // Close modals when clicking outside

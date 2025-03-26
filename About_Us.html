@@ -5,121 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Add Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        
         .main-container {
-            display: flex; justify-content: center; align-items: center; padding: 50px 20px; gap: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .card {
-            background-color: #f0f0f0; border-radius: 10px; width: 250px; height: 300px; display: flex;
-            flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-decoration: none; color: black; transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding:10px;
+            width: 250px;
+            height: 390px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: black;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
         .card img {
-            width: 80%; height: auto; margin-bottom: 15px;
+            width: 90%;
+            height: auto;
+            margin-bottom: 15px;
         }
-        .team-card {
-            transition: all 0.3s ease-in-out; height: 80px; overflow: hidden;
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 8px;
+            transition: transform 0.2s ease;
         }
-        .team-card:hover {
-            height: 150px;
+        .social-icon:hover {
+            transform: scale(1.1);
         }
-        /* Footer */
-        footer {
-            background: #ddd; text-align: center; padding: 15px 20px; margin-top: 50px;
+        .faq-item {
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
-        footer a {
-            color: #000; text-decoration: none;
+        
+        .faq-toggle {
+            padding: 15px 20px;
+            border-radius: 10px;
         }
-        footer a:hover {
-            text-decoration: underline;
+        
+        .faq-content {
+            padding: 0 20px 15px 20px;
         }
     </style>
 </head>
-
 <body class="bg-gray-100">
     <!-- Navbar -->
-    <nav class="bg-blue-600 text-white py-4 px-6 flex justify-between items-center">
+    <nav class="bg-purple-600 text-white py-4 px-6 flex justify-between items-center flex-wrap">
         <div class="text-xl font-bold">ResumePro</div>
         <div class="flex items-center space-x-6">
-            <a href="About.html" class="hover:underline">About Us</a>
-            <a href="Resume_builder.html" class="hover:underline">Resume Builder</a>
+            <a href="About_Us.html" class="hover:underline">About Us</a>
+            <a href="Resume_Builder.html" class="hover:underline">Resume Builder</a>
             <a href="login.html" class="hover:underline">Login</a>
             <a href="signup.html" class="hover:underline">Signup</a>
-            <!-- Profile Circle -->
-            <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">
-                JD
-            </div>
+            <div id="profile-btn" class="w-10 h-10 bg-white text-blue-600 font-bold flex items-center justify-center rounded-full cursor-pointer border border-blue-600">PM</div>
         </div>
     </nav>
     
     <!-- Profile Modal -->
-    <div id="profile-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
-            <div class="w-16 h-16 mx-auto bg-blue-600 text-white text-xl font-bold flex items-center justify-center rounded-full">
-                JD
-            </div>
-            <p class="mt-4 text-lg font-semibold">John Doe</p>
-            <p class="text-gray-600">johndoe@example.com</p>
+    <div id="profile-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center relative">
+            <span id="close-profile" class="absolute top-2 right-2 text-gray-500 cursor-pointer text-xl">&times;</span>
+            <div class="w-16 h-16 mx-auto bg-blue-600 text-white text-xl font-bold flex items-center justify-center rounded-full">PM</div>
+            <p class="mt-4 text-lg font-semibold">Preeti Mishra</p>
+            <p class="text-gray-600">Preeti@gmail.com</p>
             <button id="signout-btn" class="mt-6 bg-red-500 text-white px-4 py-2 rounded-lg w-full hover:bg-red-600">Sign Out</button>
         </div>
     </div>
-    <!-- Templates Section -->
-    <br><br>
-    <h2 class="text-2xl font-bold" style="text-align: center;">Templates</h2>
-    <div class="main-container">
-        <a href="#Template-1" class="card">
-            <img src="Template-1.png" alt="Template-1">
-            <p class="font-bold mt-2">Template-1</p>
-        </a>
-        <a href="#Template-2" class="card">
-            <img src="Template-2.png" alt="Template-2">
-            <p class="font-bold mt-2">Template-1</p>
-        </a>
-        <a href="#Template-3" class="card">
-            <img src="Template-3.png" alt="Template-3">
-            <p class="font-bold mt-2">Template-1</p>
-        </a>
-    </div>
-    <div class="bg-gray-100 p-10">
-        <section class="text-center">
-            <h3 class="text-2xl font-semibold mb-6">Meet Our Team</h3>
-            <div class="flex justify-center space-x-6">
-                <!-- Team Member 1 -->
-                <div class="bg-white p-6 w-64 rounded-lg shadow-md team-card text-center transform transition duration-300 hover:scale-105">
-                    <h4 class="text-lg font-semibold">Chandratapa</h4>
-                    <p class="mt-2 text-gray-600 opacity-0 team-desc transition-opacity duration-300">Student</p>
-                </div>    
-                <!-- Team Member 2 -->
-                <div class="bg-white p-6 w-64 rounded-lg shadow-md team-card text-center transform transition duration-300 hover:scale-105">
-                    <h4 class="text-lg font-semibold">Anika</h4>
-                    <p class="mt-2 text-gray-600 opacity-0 team-desc transition-opacity duration-300">Student</p>
-                </div>
-            </div>
-        </section>
-    </div>
-    
-    <script>
-        document.querySelectorAll('.team-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.height = '150px';
-                card.querySelector('.team-desc').style.opacity = '1';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.height = '80px';
-                card.querySelector('.team-desc').style.opacity = '0';
-            });
-        });
-    </script>
-</body>
-</html>
 
-    
     <!-- Sign Out Confirmation Modal -->
-    <div id="signout-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div id="signout-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
             <p class="text-lg font-semibold">Are you sure you want to sign out?</p>
             <div class="flex justify-center space-x-4 mt-4">
@@ -129,9 +107,239 @@
         </div>
     </div>
     
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-teal-400 to-teal-400 text-white py-12 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-4">Create Professional Resumes in Minutes</h1>
+            <p class="text-xl mb-8">Choose from our professionally designed templates and customize to stand out from the crowd</p>
+            </div>
+    </div>
+    <div class="py-16 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Why Choose ResumePro?</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">We offer the perfect tools to help you stand out in today's competitive job market</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="text-4xl text-indigo-500 mb-4">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Professional Templates</h3>
+                    <p class="text-gray-600">Choose from professionally designed templates that catch recruiters' attention.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="text-4xl text-pink-500 mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fast & Easy</h3>
+                    <p class="text-gray-600">Create your perfect resume in minutes with our intuitive drag-and-drop builder.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-4xl text-orange-500 mb-4">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Easy Download</h3>
+                    <p class="text-gray-600">Export your resume in PDF or Word formats</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="text-4xl text-cyan-500 mb-4">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">ATS Optimized</h3>
+                    <p class="text-gray-600">Ensure your resume passes Applicant Tracking Systems with our expert-designed formats.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="text-4xl text-rose-500 mb-4">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Grammar Check</h3>
+                    <p class="text-gray-600">Avoid mistakes with our built-in grammar and spelling checker for flawless resumes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates Section -->
+        <div class="py-16 px-6 bg-gradient-to-b from-red-300 to-rose-100">
+            <h2 class="text-3xl font-bold text-center mb-3 text-gray-800">Premium Templates</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Find the perfect design to showcase your skills and experience</p>
+        <div class="main-container">
+            <a href="#Template-1" class="card">
+                <img src="https://free-cv-templates.com/wp-content/uploads/2017/02/Frame-1-772x1024.jpg" alt="Template-1">
+                <p class="font-bold mt-2">Executive Classic</p>
+            </a>
+            <a href="#Template-2" class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMQFIhOapqF_eHfH8IPFN22laC-349gzkQCg&s" alt="Template-2">
+                <p class="font-bold mt-2">Modern Professional</p>
+            </a>
+            <a href="#Template-3" class="card">
+                <img src="https://www.resumebuilder.com/wp-content/uploads/2023/10/Food-Service-Basic-Resume-Example.pdf.jpeg" alt="Template-3">
+                <p class="font-bold mt-2">Creative Portfolio</p>
+            </a>
+            <a href="#Template-4" class="card">
+                <img src="https://www.hloom.com/images/application-engineer-resume-template-contessa-rose.svg" alt="Template-4" height="100px"><br>
+                <p class="font-bold mt-2">Splash of Pink</p>
+            </a>
+        </div>
+    </div>
+    <!-- Testimonials Section -->
+    <div class="py-16 px-6 bg-gradient-to-r from-purple-200 to-indigo-100">
+        <div class="max-w-6xl mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-3 text-gray-800">What Our Users Say</h3>
+            <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto">Join thousands of satisfied job seekers who landed their dream jobs</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600">5.0</span>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">"Created my resume in just 20 minutes and got called for an interview the next day. The templates are amazing!"</p>
+                    <p class="font-medium">- Bhavesh Kumar</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600">5.0</span>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">"As someone with no design skills, this tool was a lifesaver. Professional resume without any hassle!"</p>
+                    <p class="font-medium">- Ruchi Thapa</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600">4.5</span>
+                    </div>
+                    <p class="text-gray-600 italic mb-4">"After using ResumePro, I received compliments from recruiters about my resume design. Highly recommend!"</p>
+                    <p class="font-medium">- Ritwick Sen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Team Section -->
+     
+    <div class="bg-white py-12 px-6">
+        <section class="max-w-4xl mx-auto text-center">
+            <h3 class="text-3xl font-bold mb-10">Meet Our Team</h3>
+            <div class="flex flex-wrap justify-center gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-gray-50 p-6 w-64 rounded-lg shadow-md team-card text-center transform transition duration-300 hover:scale-105 overflow-hidden">
+                    <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xl font-bold flex items-center justify-center rounded-full mx-auto mb-4">C</div>
+                    <h4 class="text-xl font-semibold">Chandratapa</h4>
+                    <p class="mt-2 text-gray-600 opacity-0 team-desc transition-opacity duration-300">Student</p>
+                </div>    
+                <!-- Team Member 2 -->
+                <div class="bg-gray-50 p-6 w-64 rounded-lg shadow-md team-card text-center transform transition duration-300 hover:scale-105 overflow-hidden">
+                    <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-600 text-white text-xl font-bold flex items-center justify-center rounded-full mx-auto mb-4">A</div>
+                    <h4 class="text-xl font-semibold">Anika</h4>
+                    <p class="mt-2 text-gray-600 opacity-0 team-desc transition-opacity duration-300">Student</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    
+    <!-- FAQ Section -->
+    <div class="bg-gradient-to-b from-fuchsia-200 to-indigo-200 py-16 px-6">
+        <section class="max-w-3xl mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-3 text-gray-800">Frequently Asked Questions</h3>
+            <p class="text-center text-gray-600 mb-12">Can't find the answer here? Check out our <a href="#" class="text-indigo-600 underline hover:text-indigo-800 transition duration-300">Help Center</a>.</p>
+    
+            <div class="space-y-4">
+                <!-- FAQ Item -->                
+                <div class="faq-item shadow-md border border-amber-200">
+                    <button class="w-full flex justify-between items-center text-left text-lg font-medium focus:outline-none faq-toggle bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800">
+                        How much does the Resume Generator cost?
+                        <span class="text-xl font-bold">+</span>
+                    </button>
+                    <p class="mt-2 text-gray-700 hidden faq-content">Our Resume Generator is completely free to use with premium features available for a small subscription fee. Basic templates and essential features are always free!</p>
+                </div>
+    
+                <!-- FAQ Item 2 -->
+                <div class="faq-item shadow-md border border-amber-200">
+                    <button class="w-full flex justify-between items-center text-left text-lg font-medium focus:outline-none faq-toggle bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800">
+                        How do I use the Resume Builder?
+                        <span class="text-xl font-bold">+</span>
+                    </button>
+                    <p class="mt-2 text-gray-700 hidden faq-content">Simply enter your details, choose a template, and download your resume in PDF or Word format. Our intuitive interface makes it easy even for first-time users.</p>
+                </div>
+    
+                <!-- FAQ Item 3 -->
+                <div class="faq-item shadow-md border border-amber-200">
+                    <button class="w-full flex justify-between items-center text-left text-lg font-medium focus:outline-none faq-toggle bg-gradient-to-r from-amber-100 to-yellow-100 text-amber-800">
+                        How can I contact support?
+                        <span class="text-xl font-bold">+</span>
+                    </button>
+                    <p class="mt-2 text-gray-700 hidden faq-content">You can contact our support team through our Help Center or email us directly at support@resumepro.com. We typically respond within 24 hours.</p>
+                </div>
+            </div>
+        </section>
+    
+        
+    
+    
+        <!-- Contact Form -->
+        <div class="bg-white shadow-md rounded-lg p-8 mt-12 max-w-3xl mx-auto">
+            <h3 class="text-2xl font-semibold mb-4">Have More Questions?</h3>
+            <p class="text-gray-600 mb-6">Submit your question below, and our team will get back to you:</p>
+            <textarea class="w-full border p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" placeholder="Type your question here..."></textarea>
+            <button class="mt-6 bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition duration-300">Submit Question</button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 flex flex-col items-center space-y-6">
+            <h3 class="text-2xl font-semibold">Connect With Us</h3>
+            <div class="flex space-x-4">
+                <!-- Social Media Icons -->
+                <a href="#" class="social-icon bg-blue-600 hover:bg-blue-700">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon bg-pink-600 hover:bg-pink-700">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon bg-black hover:bg-gray-800">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="#" class="social-icon bg-blue-700 hover:bg-blue-800">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <div class="pt-8 border-t border-gray-700 w-full text-center">
+                <p class="text-gray-400">© 2025 ResumePro. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
     <script>
+        // Profile Modal Functionality
         const profileBtn = document.getElementById("profile-btn");
         const profileModal = document.getElementById("profile-modal");
+        const closeProfile = document.getElementById("close-profile");
         const signoutBtn = document.getElementById("signout-btn");
         const signoutModal = document.getElementById("signout-modal");
         const confirmSignout = document.getElementById("confirm-signout");
@@ -139,6 +347,14 @@
 
         profileBtn.addEventListener("click", () => {
             profileModal.classList.remove("hidden");
+        });
+
+        closeProfile.addEventListener("click", () => {
+            profileModal.classList.add("hidden");
+        });
+
+        profileModal.addEventListener("click", (e) => {
+            if (e.target === profileModal) profileModal.classList.add("hidden");
         });
 
         signoutBtn.addEventListener("click", () => {
@@ -154,50 +370,29 @@
         cancelSignout.addEventListener("click", () => {
             signoutModal.classList.add("hidden");
         });
-    </script>
-    <div class="bg-gray-100 p-10">
-        <section class="max-w-3xl mx-auto">
-            <h3 class="text-2xl font-semibold mb-2">FAQs</h3>
-            <p class="text-gray-600 mb-6">Can't find the answer here? Check out our <a href="#" class="text-blue-600 underline">Help Center</a>.</p>
-    
-            <div class="space-y-4">
-                <!-- FAQ Item -->
-                <div class="border-b pb-2">
-                    <button class="w-full flex justify-between items-center text-left text-lg font-medium focus:outline-none faq-toggle">
-                        How much does the Resume Generator cost?
-                        <span class="text-xl">+</span>
-                    </button>
-                    <p class="mt-2 text-gray-600 hidden faq-content">Our Resume Generator is completely free to use with premium features available.</p>
-                </div>
-    
-                <div class="border-b pb-2">
-                    <button class="w-full flex justify-between items-center text-left text-lg font-medium focus:outline-none faq-toggle">
-                        How do I use the Resume Builder?
-                        <span class="text-xl">+</span>
-                    </button>
-                    <p class="mt-2 text-gray-600 hidden faq-content">Simply enter your details, choose a template, and download your resume in PDF or Word format.</p>
-                </div>
-    
-                <div class="border-b pb-2">
-                    <button class="w-full flex justify-between items-center text-left text-lg font-medium focus:outline-none faq-toggle">
-                        How can I contact support?
-                        <span class="text-xl">+</span>
-                    </button>
-                    <p class="mt-2 text-gray-600 hidden faq-content">You can contact our support team through our Help Center or email us directly.</p>
-                </div>
-            </div>
-        </section>
-    
-        <!-- Contact Form -->
-        <div class="bg-white shadow-md rounded-lg p-6 mt-8 max-w-3xl mx-auto">
-            <h3 class="text-xl font-semibold mb-4">Have More Questions?</h3>
-            <p class="text-gray-600 mb-4">Submit your question below, and our team will get back to you:</p>
-            <textarea class="w-full border p-3 rounded-md" rows="4" placeholder="Type your question here..."></textarea>
-            <button class="mt-4 bg-black text-white px-4 py-2 rounded-md">Submit Question</button>
-        </div>
-    </div>
-    
-    <script>
+
+        // Close modals when clicking outside
+        signoutModal.addEventListener("click", (e) => {
+            if (e.target === signoutModal) signoutModal.classList.add("hidden");
+        });
+
+        // Team Cards Animation
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.height = '150px';
+                card.querySelector('.team-desc').style.opacity = '1';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.height = '80px';
+                card.querySelector('.team-desc').style.opacity = '0';
+            });
+        });
+        confirmSignout.addEventListener("click", () => {
+            window.location.href = "logout.html";  
+        });
+
+
+        // FAQ Toggle Functionality
         document.querySelectorAll('.faq-toggle').forEach(button => {
             button.addEventListener('click', () => {
                 const content = button.nextElementSibling;
@@ -206,11 +401,5 @@
             });
         });
     </script>
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 ResumePro. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-        </p>
-    </footer>
-    
 </body>
 </html>

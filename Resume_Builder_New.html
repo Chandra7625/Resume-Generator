@@ -116,16 +116,14 @@
         confirmSignout.addEventListener("click", () => {
             signoutModal.classList.add("hidden");
             alert("You have signed out.");
-            // Additional sign out functionality could go here
+        });
+        confirmSignout.addEventListener("click", () => {
+            window.location.href = "logout.html";  
         });
 
         cancelSignout.addEventListener("click", () => {
             signoutModal.classList.add("hidden");
-            // Optionally reopen the profile modal
-            // profileModal.classList.remove("hidden");
         });
-
-        // Close modals when clicking outside
         signoutModal.addEventListener("click", (e) => {
             if (e.target === signoutModal) signoutModal.classList.add("hidden");
         });

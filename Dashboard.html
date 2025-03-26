@@ -37,7 +37,7 @@
         }
         .card img {
             width: 90%;
-            height: 750%;
+            height: auto;
             margin-bottom: 15px;
         }
         .social-icon {
@@ -108,7 +108,7 @@
     </div>
     
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-teal-400 via-cian-100 to-teal-400 text-white py-12 px-6">
+    <div class="bg-gradient-to-r from-teal-400 to-teal-400 text-white py-12 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-4xl font-bold mb-4">Create Professional Resumes in Minutes</h1>
             <p class="text-xl mb-8">Choose from our professionally designed templates and customize to stand out from the crowd</p>
@@ -387,6 +387,10 @@
                 card.querySelector('.team-desc').style.opacity = '0';
             });
         });
+        confirmSignout.addEventListener("click", () => {
+            window.location.href = "logout.html";  
+        });
+
 
         // FAQ Toggle Functionality
         document.querySelectorAll('.faq-toggle').forEach(button => {
